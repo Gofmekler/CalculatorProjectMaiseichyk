@@ -1,4 +1,6 @@
-﻿namespace CalculatorProjectMaiseichyk
+﻿using System;
+
+namespace CalculatorProjectMaiseichyk
 {
     internal class Program
     {

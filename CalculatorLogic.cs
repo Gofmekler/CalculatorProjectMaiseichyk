@@ -8,30 +8,39 @@ namespace CalculatorProjectMaiseichyk
         private const string Minus = "-";
         private const string Multiply = "*";
         private const string Divide = "/";
-        private const string Ostator = "%";
+        private const string Remainder = "%";
 
         public void CalculatorStart()
         {
+            Console.WriteLine("Вас встречает приложение калькулятор.");
             bool stopWord = false;
-
             while (!stopWord)
             {
-                Console.WriteLine("Вас встречает приложение калькулятор." +
-                "Желаете продолжить? +/-");
+                Console.WriteLine("Желаете продолжить? +/-");
                 string continueProgram = Console.ReadLine();
                 if (continueProgram.Equals("-"))
                 {
-                    stopWord = true;
                     Console.WriteLine("Досвидания");
+                    Console.ReadKey();
                     break;
                 }
                 Console.WriteLine("Выберите тип операции (+,-,/,*,%): ");
                 string choosen = Console.ReadLine();
-                Console.WriteLine("Введите первое число: ");
-                double firstNumber = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Введите второе число: ");
-                double secondNumber = Convert.ToDouble(Console.ReadLine());
-                string resultCalculated = default;
+                double firstNumber;
+                double secondNumber;
+                try
+                {
+                    Console.WriteLine("Введите первое число: ");
+                    firstNumber = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Введите второе число: ");
+                    secondNumber = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Введите число" + " " + ex.Message);
+                    continue;
+                }
+                double resultCalculated = default;
                 switch (choosen)
                 {
                     case Sum:
@@ -46,8 +55,8 @@ namespace CalculatorProjectMaiseichyk
                     case Multiply:
                         resultCalculated = CalculatorMultiply(firstNumber, secondNumber);
                         break;
-                    case Ostator:
-                        resultCalculated = CalculatorOstatok(firstNumber, secondNumber);
+                    case Remainder:
+                        resultCalculated = CalculatorRemainder(firstNumber, secondNumber);
                         break;
                     default:
                         Console.WriteLine("Операция не опознана, повторите попытку.");
@@ -58,30 +67,30 @@ namespace CalculatorProjectMaiseichyk
             }
         }
 
-        private string CalculatorSum(double firstNumber, double secondNumber)
+        private double CalculatorSum(double firstNumber, double secondNumber)
         {
             double result = firstNumber + secondNumber;
-            return result.ToString();
+            return result;
         }
-        private string CalculatorMinus(double firstNumber, double secondNumber)
+        private double CalculatorMinus(double firstNumber, double secondNumber)
         {
             double result = firstNumber - secondNumber;
-            return result.ToString();
+            return result;
         }
-        private string CalculatorMultiply(double firstNumber, double secondNumber)
+        private double CalculatorMultiply(double firstNumber, double secondNumber)
         {
             double result = firstNumber * secondNumber;
-            return result.ToString();
+            return result;
         }
-        private string CalculatorDivide(double firstNumber, double secondNumber)
+        private double CalculatorDivide(double firstNumber, double secondNumber)
         {
             double result = firstNumber / secondNumber;
-            return result.ToString();
+            return result;
         }
-        private string CalculatorOstatok(double firstNumber, double secondNumber)
+        private double CalculatorRemainder(double firstNumber, double secondNumber)
         {
             double result = firstNumber % secondNumber;
-            return result.ToString();
+            return result;
         }
     }
 }
